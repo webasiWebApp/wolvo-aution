@@ -1,0 +1,161 @@
+{
+  "name": "PricingConfig",
+  "type": "object",
+  "properties": {
+    "config_name": {
+      "type": "string",
+      "default": "default"
+    },
+    "registration_free": {
+      "type": "boolean",
+      "default": true
+    },
+    "browsing_free": {
+      "type": "boolean",
+      "default": true
+    },
+    "bidding_free": {
+      "type": "boolean",
+      "default": true
+    },
+    "verification_free": {
+      "type": "boolean",
+      "default": true
+    },
+    "attendance_free": {
+      "type": "boolean",
+      "default": true
+    },
+    "buyer_registration_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "buyer_registration_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "seller_registration_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "seller_registration_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "listing_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "listing_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "bidding_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "bidding_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "viewing_booking_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "viewing_booking_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "attendance_registration_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "attendance_registration_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "verification_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "verification_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "notifications_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "notifications_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "commission_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "commission_percent": {
+      "type": "number",
+      "default": 0
+    },
+    "featured_listing_fee_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "featured_listing_fee_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "subscription_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "subscription_monthly_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "subscription_yearly_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "premium_auction_management_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "premium_auction_management_amount": {
+      "type": "number",
+      "default": 0
+    },
+    "last_updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_updated_by": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "config_name"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

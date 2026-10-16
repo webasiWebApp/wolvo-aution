@@ -1,0 +1,52 @@
+{
+  "name": "VerificationReviewNote",
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "type": "string"
+    },
+    "admin_id": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "review_type": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "alternative",
+        "exception"
+      ]
+    },
+    "categories_reviewed": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "case_id",
+    "note"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

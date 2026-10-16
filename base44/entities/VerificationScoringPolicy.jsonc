@@ -1,0 +1,111 @@
+{
+  "name": "VerificationScoringPolicy",
+  "type": "object",
+  "properties": {
+    "config_name": {
+      "type": "string",
+      "default": "default"
+    },
+    "target_points": {
+      "type": "number",
+      "default": 100
+    },
+    "require_primary_identity": {
+      "type": "boolean",
+      "default": true
+    },
+    "require_address_evidence": {
+      "type": "boolean",
+      "default": true
+    },
+    "max_supporting_points": {
+      "type": "number",
+      "default": 100
+    },
+    "allow_police_clearance": {
+      "type": "boolean",
+      "default": true
+    },
+    "police_clearance_points": {
+      "type": "number",
+      "default": 0
+    },
+    "provider_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "provider_name": {
+      "type": "string"
+    },
+    "retention_days": {
+      "type": "number",
+      "default": 365
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "group": {
+            "type": "string",
+            "enum": [
+              "primary_identity",
+              "supporting",
+              "address",
+              "alternative_review"
+            ]
+          },
+          "points": {
+            "type": "number",
+            "default": 0
+          },
+          "max_contributions": {
+            "type": "number",
+            "default": 1
+          },
+          "requires_expiry_check": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "group"
+        ]
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "config_name",
+    "target_points",
+    "categories"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

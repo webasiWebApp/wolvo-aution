@@ -1,0 +1,67 @@
+{
+  "name": "VerificationFlag",
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "type": "string"
+    },
+    "evidence_id": {
+      "type": "string"
+    },
+    "flag_type": {
+      "type": "string",
+      "enum": [
+        "conflicting_name",
+        "conflicting_dob",
+        "conflicting_address",
+        "expired_document",
+        "suspected_duplicate_account",
+        "suspected_document_manipulation",
+        "incomplete_evidence",
+        "duplicate_document"
+      ]
+    },
+    "details": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "default": "medium"
+    },
+    "resolved": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": [
+    "case_id",
+    "flag_type"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

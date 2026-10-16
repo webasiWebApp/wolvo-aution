@@ -1,0 +1,69 @@
+{
+  "name": "Bid",
+  "type": "object",
+  "properties": {
+    "auction_id": {
+      "type": "string"
+    },
+    "auction_title": {
+      "type": "string"
+    },
+    "bidder_name": {
+      "type": "string"
+    },
+    "bidder_id": {
+      "type": "string"
+    },
+    "amount": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "placed",
+        "winning",
+        "outbid",
+        "won",
+        "lost"
+      ],
+      "default": "placed"
+    },
+    "bid_source": {
+      "type": "string",
+      "enum": [
+        "online",
+        "physical"
+      ],
+      "default": "online"
+    },
+    "auctioneer_id": {
+      "type": "string"
+    },
+    "is_sample": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "auction_id",
+    "amount"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

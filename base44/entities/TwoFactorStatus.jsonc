@@ -1,0 +1,81 @@
+{
+  "name": "TwoFactorStatus",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "totp_secret": {
+      "type": "string"
+    },
+    "enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "method": {
+      "type": "string",
+      "enum": [
+        "authenticator_app"
+      ]
+    },
+    "enrolled_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "recovery_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recovery_codes_remaining": {
+      "type": "number",
+      "default": 0
+    },
+    "last_used_step": {
+      "type": "number",
+      "default": 0
+    },
+    "failed_attempts": {
+      "type": "number",
+      "default": 0
+    },
+    "locked_until": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "mfa_verified_until": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

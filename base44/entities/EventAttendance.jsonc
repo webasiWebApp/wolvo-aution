@@ -1,0 +1,86 @@
+{
+  "name": "EventAttendance",
+  "type": "object",
+  "properties": {
+    "event_id": {
+      "type": "string"
+    },
+    "slot_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "full_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "party_size": {
+      "type": "number",
+      "default": 1
+    },
+    "booking_code": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "registered",
+        "confirmed",
+        "declined",
+        "cancelled"
+      ],
+      "default": "confirmed"
+    },
+    "check_in_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "checked_in",
+        "no_show"
+      ],
+      "default": "pending"
+    },
+    "registered_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "event_id",
+    "user_id"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

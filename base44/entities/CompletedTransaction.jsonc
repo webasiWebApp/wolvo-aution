@@ -1,0 +1,130 @@
+{
+  "name": "CompletedTransaction",
+  "type": "object",
+  "properties": {
+    "auction_id": {
+      "type": "string"
+    },
+    "buyer_id": {
+      "type": "string"
+    },
+    "seller_id": {
+      "type": "string"
+    },
+    "final_price": {
+      "type": "number"
+    },
+    "fees": {
+      "type": "number",
+      "default": 0
+    },
+    "commission": {
+      "type": "number",
+      "default": 0
+    },
+    "total": {
+      "type": "number"
+    },
+    "winning_bid_id": {
+      "type": "string"
+    },
+    "winning_bid_amount": {
+      "type": "number"
+    },
+    "payment_deadline": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "collection_deadline": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "payment_method": {
+      "type": "string",
+      "enum": [
+        "stripe",
+        "paypal",
+        "payid",
+        "bank_transfer",
+        "manual"
+      ]
+    },
+    "payment_reference": {
+      "type": "string"
+    },
+    "order_locked": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_payment",
+        "paid",
+        "ready_for_collection",
+        "completed",
+        "cancelled"
+      ],
+      "default": "pending_payment"
+    },
+    "non_payment_reported": {
+      "type": "boolean",
+      "default": false
+    },
+    "non_payment_status": {
+      "type": "string",
+      "enum": [
+        "none",
+        "reported",
+        "under_review",
+        "resolved_cancelled",
+        "resolved_offer_next",
+        "resolved_relist",
+        "resolved_dismissed"
+      ],
+      "default": "none"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "auction_id",
+    "buyer_id",
+    "seller_id",
+    "final_price"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.buyer_id": "{{user.id}}"
+        },
+        {
+          "data.seller_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

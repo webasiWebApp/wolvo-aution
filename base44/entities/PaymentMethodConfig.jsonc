@@ -1,0 +1,106 @@
+{
+  "name": "PaymentMethodConfig",
+  "type": "object",
+  "properties": {
+    "config_name": {
+      "type": "string",
+      "default": "default"
+    },
+    "stripe_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "stripe_mode": {
+      "type": "string",
+      "enum": [
+        "test",
+        "live"
+      ],
+      "default": "test"
+    },
+    "paypal_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "paypal_mode": {
+      "type": "string",
+      "enum": [
+        "sandbox",
+        "live"
+      ],
+      "default": "sandbox"
+    },
+    "payid_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "payid_alias": {
+      "type": "string"
+    },
+    "payid_name": {
+      "type": "string"
+    },
+    "payid_instructions": {
+      "type": "string"
+    },
+    "bank_transfer_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "bank_name": {
+      "type": "string"
+    },
+    "bank_account_name": {
+      "type": "string"
+    },
+    "bank_bsb": {
+      "type": "string"
+    },
+    "bank_account_number": {
+      "type": "string"
+    },
+    "bank_instructions": {
+      "type": "string"
+    },
+    "default_payment_deadline_days": {
+      "type": "number",
+      "default": 3
+    },
+    "live_payments_enabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "last_updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "last_updated_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "config_name"
+  ],
+  "rls": {
+    "read": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

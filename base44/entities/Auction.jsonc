@@ -1,0 +1,232 @@
+{
+  "name": "Auction",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "condition": {
+      "type": "string",
+      "enum": [
+        "New",
+        "Used - Like New",
+        "Used - Good",
+        "Used - Fair",
+        "For Parts or Repair",
+        "Antique / Collectable"
+      ]
+    },
+    "suburb": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "WA",
+        "SA",
+        "TAS",
+        "ACT",
+        "NT"
+      ]
+    },
+    "lot_number": {
+      "type": "string"
+    },
+    "starting_bid": {
+      "type": "number"
+    },
+    "current_highest_bid": {
+      "type": "number"
+    },
+    "min_bid_increment": {
+      "type": "number",
+      "default": 10
+    },
+    "reserve_price": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "upcoming",
+        "open",
+        "closed"
+      ],
+      "default": "upcoming"
+    },
+    "bidding_type": {
+      "type": "string",
+      "enum": [
+        "online",
+        "physical",
+        "hybrid"
+      ],
+      "default": "online"
+    },
+    "online_bidding_enabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "start_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "closing_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "physical_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expected_duration_minutes": {
+      "type": "number",
+      "default": 120
+    },
+    "registration_deadline": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "registration_open_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "registration_close_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "min_confirmed_attendees": {
+      "type": "number",
+      "default": 0
+    },
+    "max_venue_capacity": {
+      "type": "number",
+      "default": 0
+    },
+    "attendance_requires_approval": {
+      "type": "boolean",
+      "default": false
+    },
+    "attendance_status": {
+      "type": "string",
+      "enum": [
+        "REGISTRATION_OPEN",
+        "AWAITING_MINIMUM_ATTENDANCE",
+        "MINIMUM_ATTENDANCE_REACHED",
+        "AWAITING_SELLER_CONFIRMATION",
+        "AUCTION_CONFIRMED",
+        "AUCTION_RESCHEDULED",
+        "AUCTION_CANCELLED",
+        "AUCTION_COMPLETED"
+      ],
+      "default": "REGISTRATION_OPEN"
+    },
+    "inspections_available": {
+      "type": "boolean",
+      "default": false
+    },
+    "viewing_notes": {
+      "type": "string"
+    },
+    "auctioneer_id": {
+      "type": "string"
+    },
+    "paused": {
+      "type": "boolean",
+      "default": false
+    },
+    "pause_reason": {
+      "type": "string"
+    },
+    "paused_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "resumed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "extended_closing_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "winning_bid_id": {
+      "type": "string"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "is_sample": {
+      "type": "boolean",
+      "default": true
+    },
+    "bid_count": {
+      "type": "number",
+      "default": 0
+    },
+    "live_stream_url": {
+      "type": "string"
+    },
+    "live_now": {
+      "type": "boolean",
+      "default": false
+    },
+    "live_source": {
+      "type": "string"
+    },
+    "live_started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "seller_id": {
+      "type": "string"
+    },
+    "garage_sale_event_id": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "starting_bid",
+    "status",
+    "closing_time",
+    "bidding_type"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}

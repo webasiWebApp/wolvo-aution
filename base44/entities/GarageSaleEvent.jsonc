@@ -1,0 +1,130 @@
+{
+  "name": "GarageSaleEvent",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "participation": {
+      "type": "string",
+      "enum": [
+        "online",
+        "physical",
+        "hybrid"
+      ],
+      "default": "online"
+    },
+    "venue_name": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "suburb": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "NSW",
+        "VIC",
+        "QLD",
+        "WA",
+        "SA",
+        "TAS",
+        "ACT",
+        "NT"
+      ]
+    },
+    "inspection_notes": {
+      "type": "string"
+    },
+    "inspection_times": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "event_start": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "event_end": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "collection_instructions": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "open",
+        "closed",
+        "cancelled"
+      ],
+      "default": "draft"
+    },
+    "organizer_id": {
+      "type": "string"
+    },
+    "live_stream_url": {
+      "type": "string"
+    },
+    "live_now": {
+      "type": "boolean",
+      "default": false
+    },
+    "live_source": {
+      "type": "string"
+    },
+    "live_started_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "title",
+    "status"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "delete": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    }
+  }
+}

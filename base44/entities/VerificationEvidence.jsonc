@@ -1,0 +1,134 @@
+{
+  "name": "VerificationEvidence",
+  "type": "object",
+  "properties": {
+    "case_id": {
+      "type": "string"
+    },
+    "user_id": {
+      "type": "string"
+    },
+    "file_uri": {
+      "type": "string"
+    },
+    "file_name": {
+      "type": "string"
+    },
+    "document_type": {
+      "type": "string",
+      "enum": [
+        "passport",
+        "drivers_licence",
+        "proof_of_age",
+        "birth_certificate",
+        "citizenship_certificate",
+        "medicare",
+        "other_approved",
+        "utility_bill",
+        "bank_statement",
+        "government_correspondence",
+        "council_rates",
+        "tenancy_agreement",
+        "police_clearance",
+        "other"
+      ]
+    },
+    "category_group": {
+      "type": "string",
+      "enum": [
+        "primary_identity",
+        "supporting",
+        "address",
+        "alternative_review"
+      ]
+    },
+    "points_awarded": {
+      "type": "number",
+      "default": 0
+    },
+    "extracted_name": {
+      "type": "string"
+    },
+    "extracted_dob": {
+      "type": "string"
+    },
+    "extracted_address": {
+      "type": "string"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date"
+    },
+    "document_reference": {
+      "type": "string"
+    },
+    "provider_reference": {
+      "type": "string"
+    },
+    "provider_verified": {
+      "type": "boolean",
+      "default": false
+    },
+    "verification_method": {
+      "type": "string",
+      "enum": [
+        "ocr",
+        "manual",
+        "provider",
+        "awaiting_external"
+      ],
+      "default": "awaiting_external"
+    },
+    "is_duplicate": {
+      "type": "boolean",
+      "default": false
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending_review",
+        "accepted",
+        "rejected",
+        "duplicate"
+      ],
+      "default": "pending_review"
+    },
+    "uploaded_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "case_id",
+    "user_id",
+    "file_uri",
+    "document_type"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "created_by_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "created_by_id": "{{user.id}}"
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
