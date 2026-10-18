@@ -1,0 +1,4 @@
+# Generated knowledge graph and cache (rebuild with /graphify)
+graphify-out/
+# Personal Claude Code settings (machine-specific paths)
+.claude/settings.local.json
