@@ -10,6 +10,7 @@ Wolvo is an Australian online auction marketplace.
 | Backend  | NestJS + TypeScript                                                | `backend/`   |
 | Database | PostgreSQL                                                         | (via `backend/` migrations) |
 
+- `docs/` — the project reference and notes folder. Check it first for requirements and context; write any notes, plans or decisions there as markdown.
 - `docs/assessment/` — assessment report, inventory, gap analysis, dependencies.
 - `docs/Completed-task.md` — log of completed tasks (see "After each task").
 - Current state: `frontend/` is the exported Base44 app (still `.jsx`, Base44 SDK; its own notes are in `frontend/AGENTS.md`). `backend/` is empty and will hold the NestJS API.

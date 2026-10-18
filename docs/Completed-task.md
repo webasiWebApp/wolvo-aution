@@ -7,3 +7,9 @@
   - `CLAUDE.md` (new)
   - `docs/Completed-task.md` (this log)
 - **Checks:** Docs only, no code changed, so lint, type check, unit and e2e tests were not run. `backend/` has no code yet.
+
+## 2026-10-18 — docs/ as the reference and notes folder
+
+- **Summary:** Added a rule to `CLAUDE.md` that `docs/` is the place to look for project context and to write notes.
+- **Changed files:** `CLAUDE.md`, `docs/Completed-task.md`
+- **Checks:** Docs only, so no lint or tests were run.
