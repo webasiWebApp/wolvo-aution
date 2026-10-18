@@ -5,4 +5,10 @@ export default tseslint.config(
   { ignores: ['dist/', 'node_modules/', 'coverage/'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  {
+    rules: {
+      // Allow unused parameters that must exist to match an interface, if prefixed with _.
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+    },
+  },
 );

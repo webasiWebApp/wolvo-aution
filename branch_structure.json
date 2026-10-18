@@ -1,0 +1,18 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "m2-marketplace-core",
+    "main",
+    "origin"
+  ],
+  "parent": {
+    "m2-marketplace-core": "main",
+    "main": null,
+    "origin": "main"
+  },
+  "order": [
+    "main",
+    "m2-marketplace-core",
+    "origin"
+  ]
+}

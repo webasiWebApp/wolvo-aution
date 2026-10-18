@@ -50,6 +50,7 @@ describe('Database schema (e2e, real PostgreSQL)', () => {
     expect(applied.map((m) => m.name)).toEqual([
       'M1Foundation1792281600000',
       'M2MarketplaceCore1792285200000',
+      'M2Files1792288800000',
     ]);
   });
 
@@ -166,10 +167,11 @@ describe('Database schema (e2e, real PostgreSQL)', () => {
     await app.close();
   });
 
-  it('reverts both migrations cleanly', async () => {
+  it('reverts every migration cleanly', async () => {
     await ds.query(`DELETE FROM watchlist; DELETE FROM bids; DELETE FROM auctions; DELETE FROM users;`);
-    await ds.undoLastMigration({ transaction: 'each' });
-    await ds.undoLastMigration({ transaction: 'each' });
+    for (let i = 0; i < ds.migrations.length; i += 1) {
+      await ds.undoLastMigration({ transaction: 'each' });
+    }
     const rows: { table_name: string }[] = await ds.query(
       `SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name <> 'migrations'`,
     );
