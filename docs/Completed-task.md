@@ -30,3 +30,25 @@
 - **Summary:** Built a graphify knowledge graph of the repo (266 files: 250 code, 16 docs) with 1,205 nodes, 2,928 edges and 65 labelled communities. Ran `graphify claude install`, which added a `## graphify` section to `CLAUDE.md`: codebase questions go through `graphify query` / `path` / `explain` before raw file searches, and `graphify update .` runs after code changes. Its search-reminder hooks are in `.claude/settings.local.json`, which is personal and not committed because it holds a machine-specific path. `graphify-out/` is generated, so it is gitignored.
 - **Changed files:** `CLAUDE.md`, `.gitignore` (new), `docs/Completed-task.md`
 - **Checks:** Docs and config only, so no lint or tests were run.
+
+## 2026-10-18 — Listings module (NestJS)
+
+- **Summary:** There was no existing M1 auth, roles guard or open/close scheduler to build on, so I added the minimum the listings module needs. These pieces now set the backend conventions:
+  - `POST /auth/login` (argon2 password check, JWT signed with `JWT_SECRET`)
+  - a global JWT guard with `@Public()`, plus `@Roles()` with a `RolesGuard`, and `@CurrentUser()`
+  - one error format for every response, `{ statusCode, error, message, details?, path, timestamp }`
+  - a global `ValidationPipe` (whitelist, unknown fields rejected)
+  - Swagger docs at `/api/docs` (JSON at `/api/docs-json`)
+  - an `AuditService`
+- **Listings module:**
+  - create (signed-in, email-verified users, rate-limited per user)
+  - edit (owner or admin; after the first bid or once open, only `description` and `viewingNotes`; otherwise `409 LISTING_FIELDS_LOCKED` with `details.lockedFields`)
+  - publish (owner only; requires a photo, a category, a start at least 5 minutes ahead, an end after the start, and at most 30 days)
+  - cancel (owner before any bids; admin any time with a required reason)
+  - `GET /me/listings?status=`, `GET /listings/:id/manage`, and a public `GET /listings/:id`
+  - drafts, cancelled and hidden listings return 404 to everyone except the owner and admins, and the reserve is never in public responses (only `reserveStatus`)
+  - audit entries for publish, cancel and every admin change
+  - `ListingLifecycleService` opens and closes listings on schedule, one conditional UPDATE per transition. Physical and hybrid listings stay upcoming until an admin assigns an auctioneer.
+- **Not built yet:** photo upload (the e2e tests insert `auction_images` rows directly), bidding and winner settlement, registration and email verification. The rate-limit counter lives in memory, so it is per app instance.
+- **Changed files:** `backend/.env.example`, `backend/package.json`, `backend/package-lock.json`, `backend/src/main.ts`, `backend/src/app.module.ts`, `backend/src/app.setup.ts` (new), `backend/src/common/errors/app-error.ts` (new), `backend/src/common/errors/http-exception.filter.ts` (new), `backend/src/auth/*` (new: `auth.module.ts`, `auth.controller.ts`, `auth.service.ts`, `auth-user.ts`, `jwt-auth.guard.ts`, `roles.guard.ts`, `decorators/auth.decorators.ts`, `dto/login.dto.ts`), `backend/src/users/user.entity.ts` (new), `backend/src/audit/*` (new: `audit.module.ts`, `audit.service.ts`, `audit-log.entity.ts`), `backend/src/listings/*` (new: `listings.module.ts`, `listings.controller.ts`, `listings.service.ts`, `listing-rules.ts`, `listing-rules.spec.ts`, `listing-lifecycle.service.ts`, `listing-create-throttler.guard.ts`, `dto/listing-fields.dto.ts`, `dto/listing-input.dto.ts`, `dto/listing-response.dto.ts`, `entities/auction.entity.ts`, `entities/auction-image.entity.ts`, `entities/bid.entity.ts`), `backend/test/listings.e2e-spec.ts` (new), `docs/Completed-task.md`. `backend/.env` got a generated `JWT_SECRET`; it is gitignored and not committed.
+- **Checks:** lint ✅, type check ✅, build ✅, unit tests 21/21 ✅, e2e tests 34/34 ✅ (against real PostgreSQL databases `wolvo_test` and `wolvo_test_listings`, created and dropped on each run).
