@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "start": "node dist/main.js",
+    "build": "node api.js && tsc -p tsconfig.build.json",
+    "start": "node api.js && node dist/main.js",
     "start:dev": "ts-node -r tsconfig-paths/register src/main.ts",
     "lint": "eslint \"{src,test}/**/*.ts\"",
     "typecheck": "tsc --noEmit -p tsconfig.json",
